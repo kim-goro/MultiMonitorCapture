@@ -5,6 +5,7 @@ using MultiMonitorCapture.Api;
 using MultiMonitorCapture.Designer;
 using MultiMonitorCapture.Domain.Models;
 using MultiMonitorCapture.Presentation.Presenters;
+using MultiMonitorCapture.Properties;
 
 namespace MultiMonitorCapture
 {
@@ -92,7 +93,7 @@ namespace MultiMonitorCapture
 
             if (chosen.IsPrimary)
             {
-                MessageBox.Show("이미 주 모니터입니다.", "주 모니터 설정",
+                MessageBox.Show(AppStrings.Cur.AlreadyPrimaryMessage, AppStrings.Cur.PickerWindowTitle,
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
@@ -105,8 +106,8 @@ namespace MultiMonitorCapture
             }
             else
             {
-                MessageBox.Show("주 모니터를 변경하지 못했습니다. 현재 환경에서 지원되지 않을 수 있습니다.",
-                    "주 모니터 설정", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(AppStrings.Cur.SetPrimaryFailedMessage,
+                    AppStrings.Cur.PickerWindowTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 

@@ -1,5 +1,6 @@
 using System.Drawing;
 using System.Windows.Forms;
+using MultiMonitorCapture.Properties;
 
 namespace MultiMonitorCapture.Designer
 {
@@ -42,7 +43,7 @@ namespace MultiMonitorCapture.Designer
 
             // 우클릭 메뉴 (주 모니터 설정)
             this.setPrimaryMenuItem.Name = "setPrimaryMenuItem";
-            this.setPrimaryMenuItem.Text = "주 모니터 설정";
+            this.setPrimaryMenuItem.Text = AppStrings.Cur.ContextMenuSetPrimary;
             this.setPrimaryMenuItem.Click += new System.EventHandler(this.setPrimaryMenuItem_Click);
             this.primaryMenu.Items.Add(this.setPrimaryMenuItem);
             this.primaryMenu.Name = "primaryMenu";
@@ -52,7 +53,7 @@ namespace MultiMonitorCapture.Designer
             this.emptyLabel.TextAlign = ContentAlignment.MiddleCenter;
             this.emptyLabel.ForeColor = Color.Gainsboro;
             this.emptyLabel.BackColor = Color.FromArgb(24, 24, 24);
-            this.emptyLabel.Text = "표시할 보조 모니터가 없습니다.";
+            this.emptyLabel.Text = AppStrings.Cur.EmptyMonitorMessage;
             this.emptyLabel.Name = "emptyLabel";
             this.emptyLabel.Visible = false;
 
@@ -65,7 +66,7 @@ namespace MultiMonitorCapture.Designer
             this.ContextMenuStrip = this.primaryMenu;
             this.StartPosition = FormStartPosition.CenterScreen;
             this.Name = "ControlForm";
-            this.Text = "멀티모니터캡처";
+            this.Text = AppStrings.Cur.DisplayName;
 
             this.primaryMenu.ResumeLayout(false);
             this.ResumeLayout(false);

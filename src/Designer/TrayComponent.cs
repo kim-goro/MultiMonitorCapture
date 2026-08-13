@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using MultiMonitorCapture.Infrastructure.Platform;
+using MultiMonitorCapture.Properties;
 
 namespace MultiMonitorCapture.Designer
 {
@@ -33,13 +34,13 @@ namespace MultiMonitorCapture.Designer
             _inactiveIcon = CreateStateIcon(Color.FromArgb(130, 130, 130));
 
             _menu = new ContextMenuStrip();
-            _infoItem = new ToolStripMenuItem("정보 보기");
-            _showItem = new ToolStripMenuItem("컨트롤창 띄우기");
-            _primaryItem = new ToolStripMenuItem("메인 모니터 설정하기");
-            _backgroundItem = new ToolStripMenuItem("백그라운드 캡처");
+            _infoItem = new ToolStripMenuItem(AppStrings.Cur.MenuShowInfo);
+            _showItem = new ToolStripMenuItem(AppStrings.Cur.MenuShowControl);
+            _primaryItem = new ToolStripMenuItem(AppStrings.Cur.MenuSetPrimary);
+            _backgroundItem = new ToolStripMenuItem(AppStrings.Cur.MenuBackgroundCapture);
             _backgroundItem.CheckOnClick = true;
             _backgroundItem.Checked = backgroundEnabled;
-            _exitItem = new ToolStripMenuItem("프로그램 종료");
+            _exitItem = new ToolStripMenuItem(AppStrings.Cur.MenuExit);
 
             _menu.Items.AddRange(new ToolStripItem[]
             {

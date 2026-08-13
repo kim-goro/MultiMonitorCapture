@@ -29,13 +29,15 @@ namespace MultiMonitorCapture
             SettingsService settingsService = new SettingsService(settingsRepository);
             PrimaryMonitorService primaryService = new PrimaryMonitorService(primaryController);
 
-            // 프로그램 정보. 표기 값은 AppMetadata 한곳에서 관리한다.
+            // 프로그램 정보. 표기 문구는 AppStrings, 정체성은 AppMetadata,
+            // 빌드일자는 BuildInfo(빌드마다 자동 생성)에서 각각 가져온다.
             AppInfo info = new AppInfo(
-                displayName: AppMetadata.DisplayName,
+                displayName: AppStrings.Cur.DisplayName,
                 version: AppMetadata.Version,
-                buildDate: AppMetadata.BuildDate,
+                buildDate: BuildInfo.BuildDate,
                 developer: AppMetadata.Developer,
-                caution: AppMetadata.Caution);
+                caution: AppStrings.Cur.Caution,
+                titleFormat: AppStrings.Cur.TitleFormat);
 
             // 파사드 (UI 진입점)
             IAppFacade facade = new AppFacade(info, monitorService, captureService, settingsService, primaryService);
@@ -44,7 +46,7 @@ namespace MultiMonitorCapture
             ControlForm controlForm = new ControlForm();
             CaptureTileFactory tileFactory = new CaptureTileFactory();
             ControlPresenter presenter = new ControlPresenter(facade, controlForm, tileFactory);
-            TrayComponent tray = new TrayComponent(AppMetadata.DisplayName + " v" + AppMetadata.Version, facade.Settings.BackgroundCaptureEnabled);
+            TrayComponent tray = new TrayComponent(AppStrings.Cur.DisplayName + " v" + AppMetadata.Version, facade.Settings.BackgroundCaptureEnabled);
 
             return new AppRunner(facade, controlForm, tray, presenter);
         }

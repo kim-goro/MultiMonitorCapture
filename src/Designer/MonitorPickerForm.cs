@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using MultiMonitorCapture.Domain.Models;
+using MultiMonitorCapture.Properties;
 
 namespace MultiMonitorCapture.Designer
 {
@@ -25,8 +26,8 @@ namespace MultiMonitorCapture.Designer
             monitorList.Items.Clear();
             foreach (MonitorInfo m in _monitors)
             {
-                string primaryMark = m.IsPrimary ? " (현재 주 모니터)" : string.Empty;
-                string text = string.Format("모니터 {0}: {1} [{2}x{3}]{4}",
+                string primaryMark = m.IsPrimary ? AppStrings.Cur.PickerPrimaryMark : string.Empty;
+                string text = string.Format(AppStrings.Cur.PickerMonitorFormat,
                     m.Number, m.DeviceName, m.Bounds.Width, m.Bounds.Height, primaryMark);
                 monitorList.Items.Add(text);
             }

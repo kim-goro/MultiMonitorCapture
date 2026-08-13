@@ -1,5 +1,6 @@
 using System.Drawing;
 using System.Windows.Forms;
+using MultiMonitorCapture.Properties;
 
 namespace MultiMonitorCapture.Designer
 {
@@ -32,7 +33,7 @@ namespace MultiMonitorCapture.Designer
             // 안내 라벨
             this.titleLabel.AutoSize = true;
             this.titleLabel.Location = new Point(14, 12);
-            this.titleLabel.Text = "주 모니터로 설정할 모니터를 선택하십시오.";
+            this.titleLabel.Text = AppStrings.Cur.PickerPrompt;
 
             // 모니터 목록
             this.monitorList.Location = new Point(14, 38);
@@ -42,13 +43,13 @@ namespace MultiMonitorCapture.Designer
             // 확인 버튼
             this.okButton.Location = new Point(284, 210);
             this.okButton.Size = new Size(80, 28);
-            this.okButton.Text = "설정";
+            this.okButton.Text = AppStrings.Cur.PickerButtonSet;
             this.okButton.Click += new System.EventHandler(this.okButton_Click);
 
             // 취소 버튼
             this.cancelButton.Location = new Point(374, 210);
             this.cancelButton.Size = new Size(80, 28);
-            this.cancelButton.Text = "취소";
+            this.cancelButton.Text = AppStrings.Cur.PickerButtonCancel;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
 
             // 폼
@@ -65,7 +66,7 @@ namespace MultiMonitorCapture.Designer
             this.AcceptButton = this.okButton;
             this.CancelButton = this.cancelButton;
             this.Name = "MonitorPickerForm";
-            this.Text = "주 모니터 설정";
+            this.Text = AppStrings.Cur.PickerWindowTitle;
             this.ResumeLayout(false);
             this.PerformLayout();
         }

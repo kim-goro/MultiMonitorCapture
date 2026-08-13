@@ -1,6 +1,7 @@
 using System;
 using System.Threading;
 using System.Windows.Forms;
+using MultiMonitorCapture.Properties;
 
 namespace MultiMonitorCapture
 {
@@ -25,7 +26,7 @@ namespace MultiMonitorCapture
             {
                 if (!createdNew)
                 {
-                    MessageBox.Show("멀티모니터캡처가 이미 실행 중입니다.", "멀티모니터캡처",
+                    MessageBox.Show(AppStrings.Cur.AlreadyRunningMessage, AppStrings.Cur.DisplayName,
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
@@ -56,8 +57,8 @@ namespace MultiMonitorCapture
         {
             try
             {
-                string message = ex == null ? "알 수 없는 오류가 발생했습니다." : ex.Message;
-                MessageBox.Show("오류가 발생했습니다: " + message, "멀티모니터캡처",
+                string message = ex == null ? AppStrings.Cur.UnknownErrorMessage : ex.Message;
+                MessageBox.Show(AppStrings.Cur.ErrorPrefix + message, AppStrings.Cur.DisplayName,
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch

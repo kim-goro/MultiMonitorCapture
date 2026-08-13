@@ -7,6 +7,7 @@ using MultiMonitorCapture.Api;
 using MultiMonitorCapture.Designer;
 using MultiMonitorCapture.Domain.Models;
 using MultiMonitorCapture.Presentation.Views;
+using MultiMonitorCapture.Properties;
 
 namespace MultiMonitorCapture.Presentation.Presenters
 {
@@ -113,9 +114,9 @@ namespace MultiMonitorCapture.Presentation.Presenters
             if (_monitorByNumber.TryGetValue(tile.MonitorNumber, out m))
             {
                 string msg = string.Format(
-                    "모니터 {0}\n이름: {1}\n해상도: {2} x {3}\n위치: ({4}, {5})",
+                    AppStrings.Cur.MonitorInfoFormat,
                     m.Number, m.DeviceName, m.Bounds.Width, m.Bounds.Height, m.Bounds.X, m.Bounds.Y);
-                MessageBox.Show(msg, "모니터 정보", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(msg, AppStrings.Cur.MonitorInfoTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
     }

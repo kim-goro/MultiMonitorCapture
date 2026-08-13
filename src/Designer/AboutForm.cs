@@ -1,6 +1,7 @@
 using System;
 using System.Windows.Forms;
 using MultiMonitorCapture.Domain.Models;
+using MultiMonitorCapture.Properties;
 
 namespace MultiMonitorCapture.Designer
 {
@@ -18,7 +19,7 @@ namespace MultiMonitorCapture.Designer
                 dateValue.Text = info.BuildDate;
                 developerValue.Text = info.Developer;
                 cautionValue.Text = info.Caution;
-                this.Text = info.DisplayName + " 정보";
+                this.Text = info.DisplayName + AppStrings.Cur.AboutTitleSuffix;
             }
         }
 

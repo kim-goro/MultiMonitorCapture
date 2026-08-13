@@ -45,11 +45,26 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <!-- obj/bin 의 자동생성 소스를 제외해 어셈블리 특성 중복(CS0579)을 방지한다 -->
-    <Compile Include="**\*.cs" Exclude="obj\**\*.cs;bin\**\*.cs" />
+    <!-- obj/bin 의 자동생성 소스와 빌드정보 생성 파일을 글롭에서 제외한다. -->
+    <!-- 빌드정보 파일은 아래 GenerateBuildInfo 타겟이 매 빌드마다 직접 추가한다 -->
+    <!-- (첫 빌드 시점엔 아직 파일이 없어 글롭이 못 잡으므로 명시적으로 추가해야 한다). -->
+    <Compile Include="**\*.cs" Exclude="obj\**\*.cs;bin\**\*.cs;Properties\BuildInfo.Generated.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.manifest" />
   </ItemGroup>
+
+  <PropertyGroup>
+    <BuildInfoFile>$(MSBuildProjectDirectory)\Properties\BuildInfo.Generated.cs</BuildInfoFile>
+  </PropertyGroup>
+
+  <!-- 빌드마다 빌드일자/커밋해시를 자동 주입한다. CI/CD 서버 없이 로컬 dotnet build 만으로 동작한다. -->
+  <Target Name="GenerateBuildInfo" BeforeTargets="CoreCompile">
+    <Exec Command="powershell -NoProfile -ExecutionPolicy Bypass -File &quot;$(MSBuildProjectDirectory)\..\build\generate-buildinfo.ps1&quot; -OutputPath &quot;$(BuildInfoFile)&quot;" />
+    <ItemGroup>
+      <Compile Include="$(BuildInfoFile)" />
+    </ItemGroup>
+  </Target>
+
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -412,6 +412,9 @@ FodyWeavers.xsd
 # 에디터 개인 설정 (tasks.json, launch.json 은 공유하여 F5 빌드가 동작하게 한다)
 **/.vscode/settings.json
 **/.vscode/*.local.json
+
+# 빌드마다 자동 생성되는 파일 (build/generate-buildinfo.ps1 이 매 빌드마다 새로 만듦)
+src/Properties/BuildInfo.Generated.cs
 *.code-workspace
 
 # 런타임 생성 사용자 설정 (프로그램이 %LOCALAPPDATA% 대신 로컬에 만들 경우 대비)

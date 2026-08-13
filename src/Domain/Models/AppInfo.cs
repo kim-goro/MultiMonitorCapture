@@ -18,19 +18,23 @@ namespace MultiMonitorCapture.Domain.Models
         // 취급 주의 안내 문구
         public string Caution { get; private set; }
 
-        public AppInfo(string displayName, string version, string buildDate, string developer, string caution)
+        // 제목표시줄 형식 문자열 ({0}=표시명, {1}=버전, {2}=수정일). 언어별로 다를 수 있어 주입받는다.
+        private readonly string _titleFormat;
+
+        public AppInfo(string displayName, string version, string buildDate, string developer, string caution, string titleFormat)
         {
             DisplayName = displayName;
             Version = version;
             BuildDate = buildDate;
             Developer = developer;
             Caution = caution;
+            _titleFormat = titleFormat;
         }
 
         // 제목표시줄용 문자열을 만든다 (예: 멀티모니터캡처 v1.0.0 (수정일 2026-08-13))
         public string ToTitleText()
         {
-            return string.Format("{0} v{1} (수정일 {2})", DisplayName, Version, BuildDate);
+            return string.Format(_titleFormat, DisplayName, Version, BuildDate);
         }
     }
 }
