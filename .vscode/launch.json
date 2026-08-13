@@ -1,0 +1,15 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "멀티모니터캡처 실행 (Debug)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/src/bin/Debug/MultiMonitorCapture.exe",
+      "cwd": "${workspaceFolder}/src/bin/Debug",
+      "console": "internalConsole",
+      "stopAtEntry": false
+    }
+  ]
+}

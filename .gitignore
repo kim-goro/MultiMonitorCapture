@@ -399,3 +399,29 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+# ============================================================
+# 프로젝트 전용 규칙 (MultiMonitorCapture)
+# ============================================================
+
+# AI 도구 개인 설정 (로컬 권한/환경 설정, 공유 대상 아님)
+# .claude/settings.json 과 CLAUDE.md 는 팀 공유 대상이므로 추적한다
+.claude/settings.local.json
+.claude/*.local.json
+
+# 에디터 개인 설정 (tasks.json, launch.json 은 공유하여 F5 빌드가 동작하게 한다)
+**/.vscode/settings.json
+**/.vscode/*.local.json
+*.code-workspace
+
+# 런타임 생성 사용자 설정 (프로그램이 %LOCALAPPDATA% 대신 로컬에 만들 경우 대비)
+settings.ini
+
+# 릴리스 산출물 (Releases 로 배포하며 저장소에는 커밋하지 않는다)
+*.exe
+*.zip
+!build/**/*.ps1
+
+# 로컬 검증 임시 파일
+_runtime_check*.png
+_window_only*.png
