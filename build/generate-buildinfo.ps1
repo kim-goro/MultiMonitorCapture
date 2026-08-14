@@ -8,9 +8,16 @@ param(
     [string]$OutputPath
 )
 
-$ErrorActionPreference = 'SilentlyContinue'
+# 실제 오류(파일 쓰기 실패 등)는 조용히 넘기지 않고 빌드를 실패시킨다.
+# git 이 없거나 실패하는 경우만 아래에서 개별적으로 허용한다.
+$ErrorActionPreference = 'Stop'
 
-$commit = (git rev-parse --short HEAD) 2>$null
+$commit = $null
+try {
+    $commit = (git rev-parse --short HEAD 2>$null)
+} catch {
+    $commit = $null
+}
 if ([string]::IsNullOrWhiteSpace($commit)) {
     $commit = 'unknown'
 }
@@ -40,4 +47,15 @@ if (-not (Test-Path $dir)) {
     New-Item -ItemType Directory -Path $dir -Force | Out-Null
 }
 
-Set-Content -Path $OutputPath -Value $content -Encoding UTF8
+# 내용이 실제로 바뀐 경우에만 다시 쓴다.
+# (매번 다시 쓰면 mtime 이 항상 갱신되어, 아무것도 안 바뀐 재빌드에서도
+#  CoreCompile 이 매번 다시 돈다)
+# 줄끝 문자 비교는 하지 않는다: Set-Content 가 파일 끝에 추가하는
+# 개행과 here-string 의 개행이 달라 항상 "다름"으로 판정되는 문제가 있었다.
+$existing = $null
+if (Test-Path $OutputPath) {
+    $existing = Get-Content -Path $OutputPath -Raw
+}
+if ($existing -eq $null -or $existing.Trim() -ne $content.Trim()) {
+    Set-Content -Path $OutputPath -Value $content -Encoding UTF8
+}
